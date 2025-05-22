@@ -1,11 +1,10 @@
-import Image from "next/image";
 import Link from "next/link";
 import { memo } from "react";
 
 function AppFooter() {
   return (
-    <footer>
-      <div className="pr-12 pl-12 pb-11 pt-[34px] flex flex-col xl:flex-row-reverse align-middle justify-between space-y-6 mt-0 mb-0 mr-auto ml-auto bg-black text-gray-400 text-[14px] line-height-[24px]">
+    <footer className="pr-[48px] pl-[48px] bg-black">
+      <div className="xl:max-w-[1660px] m-[0_auto] pb-11 pt-[34px] flex flex-col xl:flex-row-reverse xl:items-center align-middle justify-between space-y-6 mt-0 mb-0 bg-black text-gray-400 text-[14px] line-height-[24px]">
         <div>
           <span className="xl:flex justify-end">
             <Link href={"https://privacy.kia.com/overview/full-policy"}>
@@ -45,9 +44,9 @@ function AppFooter() {
             </span>
           </address>
         </div>
-        <p>
-          <Image alt="KIA LOGO" width={80} height={48} src={"logo_kia.5deccfef5e3772b2d594.svg"} />©
-          2023 KIA CORP. All Rights Reserved.
+        <p className="before:content-[''] before:bg-[url('/logo_kia.5deccfef5e3772b2d594.svg')] before:bg-no-repeat before:h-[48px] xl:before:h-[56px] before:block before:bg-size-[auto_100%]">
+          {/* <Image alt="KIA LOGO" width={80} height={48} src={"logo_kia.5deccfef5e3772b2d594.svg"} /> */}
+          © 2023 KIA CORP. All Rights Reserved.
         </p>
       </div>
     </footer>
