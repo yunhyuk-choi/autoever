@@ -3,7 +3,7 @@ import { memo } from "react";
 
 function NavigationMenuComponent() {
   return (
-    <div className="hidden xl:flex flex-row space-x-6 align-middle items-center mr-8 mt-8">
+    <div className="hidden xl:flex flex-row space-x-6 align-middle items-center mr-8">
       <Link
         href={"https://wiblebiz.kia.com/Guide"}
         className="text-[18px] font-extrabold pr-1 pl-1 "

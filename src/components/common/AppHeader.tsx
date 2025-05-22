@@ -6,8 +6,8 @@ import NavigationMenuComponent from "./NavigationMenuComponent";
 
 function AppHeader() {
   return (
-    <header className="">
-      <div className="pl-[24px] pr-[12px] inner flex align-middle flex-wrap mt-0 mb-0 mr-auto ml-auto h-[56px] justify-between">
+    <header className="pl-[48px] pr-[48px]">
+      <div className="max-w-[1660px] inner flex align-middle items-center flex-wrap mt-0 mb-0 mr-auto ml-auto h-[56px] xl:h-[80px] justify-between">
         <Link
           href={"https://wiblebiz.kia.com/"}
           className="flex bg-center items-center align-middle"
