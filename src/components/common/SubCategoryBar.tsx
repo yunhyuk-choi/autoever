@@ -1,3 +1,4 @@
+"use client";
 import { getCategory } from "@/service/category";
 import { useCategory } from "@/store/store";
 import { CategoryResponse } from "@/type/category";

@@ -1,13 +1,6 @@
+import { FAQDataType } from "@/type/faq";
 import { promises as fs } from "fs";
 import { NextRequest, NextResponse } from "next/server";
-
-interface FAQDataType {
-  id: number;
-  categoryName: string;
-  subCategoryName: string;
-  question: string;
-  answer: string;
-}
 
 const SubCategoryMapper: { [key: string]: string } = {
   PRODUCT: "서비스 상품",
