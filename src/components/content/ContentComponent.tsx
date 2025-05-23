@@ -7,10 +7,12 @@ import { getFaq } from "@/service/faq";
 import { FAQDataType } from "@/type/faq";
 import ContentAnswer from "@/components/content/ContentAnswer";
 import LoadNextButton from "@/components/common/LoadNextButton";
+import NoContent from "../common/NoContent";
 
 interface FAQRequestProps {
   tab: string;
   faqCategoryID: string;
+  question: string;
   offset: number;
 }
 
@@ -26,24 +28,25 @@ interface FAQResponseProps {
 }
 
 function ContentComponent() {
-  const { tab, category } = useCategory();
+  const { tab, category, question } = useCategory();
   const [nextOffset, setNextOffset] = useState<number>(0);
   const [list, setList] = useState<FAQDataType[]>([]);
 
   const req: FAQRequestProps = useMemo(() => {
-    return { tab: tab, faqCategoryID: category, offset: nextOffset };
-  }, [category, nextOffset, tab]);
+    return { tab: tab, faqCategoryID: category, offset: nextOffset, question: question };
+  }, [category, nextOffset, question, tab]);
 
   const { data, refetch } = useQuery<FAQResponseProps>({
     queryKey: ["faq", { req }],
     queryFn: () => getFaq(req),
+    enabled: req.question === "" || req.question.length > 1,
   });
 
   useEffect(() => {
     setNextOffset(0);
     setList([]);
-    refetch();
-  }, [tab, category, refetch]);
+    // refetch();
+  }, [tab, category, question]);
 
   useEffect(() => {
     if (data) setList((prev) => [...prev, ...data.items]);
@@ -60,7 +63,7 @@ function ContentComponent() {
   return (
     <div>
       <Accordion type="single" collapsible className="w-full">
-        {list.length &&
+        {list.length ? (
           list.map((item) => (
             <AccordionItem key={item.id} value={String(item.id)}>
               <AccordionTrigger className="font-bold">
@@ -70,11 +73,17 @@ function ContentComponent() {
                 <ContentAnswer answerHtml={item.answer} />
               </AccordionContent>
             </AccordionItem>
-          ))}
+          ))
+        ) : (
+          <NoContent />
+        )}
       </Accordion>
-      {data && data.pageInfo.offset !== data.pageInfo.nextOffset && (
-        <LoadNextButton onClickHandler={handleNext} value={String(data.pageInfo.nextOffset)} />
-      )}
+
+      <LoadNextButton
+        onClickHandler={handleNext}
+        value={data ? String(data.pageInfo.nextOffset) : ""}
+        className={`${data && data.pageInfo.offset !== data.pageInfo.nextOffset ? "" : "hidden"}`}
+      />
     </div>
   );
 }

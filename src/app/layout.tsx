@@ -28,10 +28,12 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
-        <AppHeader />
-        <ProviderWrapper>{children}</ProviderWrapper>
+        <ProviderWrapper>
+          <AppHeader />
+          {children}
 
-        <AppFooter />
+          <AppFooter />
+        </ProviderWrapper>
       </body>
     </html>
   );
