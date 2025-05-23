@@ -45,7 +45,6 @@ function AppFooter() {
           </address>
         </div>
         <p className="before:content-[''] before:bg-[url('/logo_kia.5deccfef5e3772b2d594.svg')] before:bg-no-repeat before:h-[48px] xl:before:h-[56px] before:block before:bg-size-[auto_100%]">
-          {/* <Image alt="KIA LOGO" width={80} height={48} src={"logo_kia.5deccfef5e3772b2d594.svg"} /> */}
           © 2023 KIA CORP. All Rights Reserved.
         </p>
       </div>
