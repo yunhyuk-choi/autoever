@@ -1,5 +1,5 @@
 import ContentHeader from "@/components/common/ContentHeader";
-import ContentTabButton from "@/components/common/ContentTabButton";
+import ContentTabButton from "@/components/content/ContentTabButton";
 
 export default function FAQLayout({ children }: { children: React.ReactNode }) {
   return (

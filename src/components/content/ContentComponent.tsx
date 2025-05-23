@@ -5,8 +5,8 @@ import { useCategory } from "@/store/store";
 import { useQuery } from "@tanstack/react-query";
 import { getFaq } from "@/service/faq";
 import { FAQDataType } from "@/type/faq";
-import ContentAnswer from "./ContentAnswer";
-import LoadNextButton from "./LoadNextButton";
+import ContentAnswer from "@/components/content/ContentAnswer";
+import LoadNextButton from "@/components/common/LoadNextButton";
 
 interface FAQRequestProps {
   tab: string;
