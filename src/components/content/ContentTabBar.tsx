@@ -11,7 +11,10 @@ export default function ContentTabBar() {
   const handleTabChange = useCallback(
     (e: MouseEvent<HTMLButtonElement>) => {
       const target = e.currentTarget.value;
-      if (target) setTab(target);
+      if (target) {
+        setTab(target);
+        document.title = `${target===CONSULT?"서비스 도입":"서비스 이용"} | 기아 비즈(Kia Biz) - 친환경 모빌리티 서비스`;
+      }
     },
     [setTab]
   );
