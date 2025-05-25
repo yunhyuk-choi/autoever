@@ -23,7 +23,7 @@ export default function ContentTabButton({
       }`}
       onClick={handleTabChange}
     >
-      <span className="">{title}</span>
+      <span >{title}</span>
     </button>
   );
 }
