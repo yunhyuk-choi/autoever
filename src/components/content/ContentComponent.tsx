@@ -55,17 +55,17 @@ function ContentComponent() {
         {list.length ? (
           list.map((item) => (
             <AccordionItem key={item.id} value={String(item.id)}>
-              <AccordionTrigger className="flex flex-wrap xl:flex-row hover:cursor-pointer data-[state=open]:bg-[#f8f8f8] text-[20px] border-b-1 p-[24px_0] border-gray-300 hover:no-underline">
-                <div className="flex flex-row gap-2 text-[16px] w-full xl:w-auto">
-                {item.categoryName!=="도입문의"?<em className="flex flex-row text-center xl:w-[8em] hover:none text-gray-500">{item.categoryName}
-                  <Image className="ml-3 xl:hidden" src={"/arrowRight.svg"} width={16} height={16} alt="arrowRight" />
-                </em>:<></>}
-                <em className="text-center xl:w-[8em] text-gray-500">{item.subCategoryName}</em>
+              <AccordionTrigger className="flex flex-wrap xl:flex-row hover:cursor-pointer data-[state=open]:bg-[#f8f8f8] text-[16px] md:text-[20px] border-b-1 p-[16px_0] md:p-[24px_0] border-gray-300 hover:no-underline">
+                <div className="flex flex-row gap-[4px] md:gap-2 text-[12px] md:text-[16px] w-full xl:w-auto">
+                {item.categoryName!=="도입문의"?<p className="flex flex-row text-center xl:w-[8em] hover:none text-gray-500">{item.categoryName}
+                  <Image className="ml-3 xl:hidden" src={"/arrowRight.svg"} width={12} height={12} alt="arrowRight" />
+                </p>:<></>}
+                <p className="text-center xl:w-[8em] text-gray-500">{item.subCategoryName}</p>
                 </div>
                 
                 <h2 className="flex-[1_1] font-bold ">{item.question}</h2>
               </AccordionTrigger>
-              <AccordionContent className="overflow-x-scroll p-[32px_40px]">
+              <AccordionContent className="overflow-x-scroll p-[20px_0] md:p-[32px_40px]">
                 <ContentAnswer answerHtml={item.answer} />
               </AccordionContent>
             </AccordionItem>

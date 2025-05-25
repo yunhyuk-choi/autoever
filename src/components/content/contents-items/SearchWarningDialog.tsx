@@ -10,11 +10,11 @@ export default function SearchWarningDialog({ isOpen, handleClose }: SearchWarni
 
   return (
     <Dialog open={isOpen}>
-      <DialogContent className="max-w-sm">
-        <DialogTitle>title</DialogTitle>
-        <div className="text-sm text-gray-600">검색어는 최소 2자 이상 입력해야 합니다.</div>
+      <DialogContent className="max-w-sm  rounded-none [button[data-state='close']]:hidden">
+        <DialogTitle className="hidden">title</DialogTitle>
+        <div className="text-sm text-gray-600">검색어는 2글자 이상 입력해주세요.</div>
         <DialogFooter>
-          <DialogClose onClick={handleClose}>확인</DialogClose>
+          <DialogClose className="hover:cursor-pointer mr-auto ml-auto border border-black p-[8px_16px]" onClick={handleClose}>확인</DialogClose>
         </DialogFooter>
       </DialogContent>
     </Dialog>

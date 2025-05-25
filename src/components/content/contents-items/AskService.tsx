@@ -22,6 +22,7 @@ export default function AskService() {
         <AskServiceButton
           href="https://pf.kakao.com/_xfLxjdb"
           url="/talk.svg"
+          target="_blank"
         >
           <p className="flex flex-col">
             카톡으로 문의하기

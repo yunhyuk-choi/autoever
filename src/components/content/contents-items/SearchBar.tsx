@@ -32,6 +32,7 @@ export default function SearchBar() {
   const handleEnter = useCallback(
     (e: KeyboardEvent<HTMLInputElement>) => {
       if (e.key === "Enter") {
+        e.preventDefault();
         handleSearch();
       }
     },

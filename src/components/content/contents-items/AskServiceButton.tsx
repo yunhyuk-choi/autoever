@@ -5,11 +5,13 @@ interface AskServiceButtonProps {
   href: string;
   download?: string;
   url: string;
+  target?: string;
 }
 
 export default function AskServiceButton({
   href,
   children,
+  target,
   url,
   download,
 }: PropsWithChildren<AskServiceButtonProps>) {
@@ -18,6 +20,7 @@ export default function AskServiceButton({
       href={href}
       download={download}
       className="flex-[1_1] justify-center w-full hover:cursor-pointer"
+      target={target}
     >
       <button className="font-bold p-[20px_40px] border w-full flex flex-row justify-center gap-2 items-center border-black hover:cursor-pointer">
         <i
