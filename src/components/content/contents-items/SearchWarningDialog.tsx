@@ -1,5 +1,5 @@
-import { Dialog, DialogContent, DialogFooter, DialogTitle } from "../ui/dialog";
-import { DialogClose } from "@radix-ui/react-dialog";
+import { Dialog, DialogClose, DialogContent, DialogFooter, DialogTitle } from "../../ui/dialog";
+
 
 interface SearchWarningDialogProps {
   isOpen: boolean;
@@ -7,7 +7,6 @@ interface SearchWarningDialogProps {
 }
 
 export default function SearchWarningDialog({ isOpen, handleClose }: SearchWarningDialogProps) {
-  console.log("DI", isOpen);
 
   return (
     <Dialog open={isOpen}>

@@ -4,10 +4,15 @@ import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from 
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "../ui/select";
 import { getTerms } from "@/service/terms";
 import { JOIN_SERVICE_USE } from "@/type/variables";
-
-import { Fragment, useMemo, useState } from "react";
+import { Fragment, useCallback, useEffect, useMemo, useState } from "react";
 import ContentAnswer from "../content/ContentAnswer";
 import { TermsDataType } from "@/type/terms";
+import { format } from "date-fns";
+
+interface PeriodListType {
+  version: number,
+  period: string
+}
 
 export default function TermsDialog() {
   const { data } = useQuery({
@@ -21,23 +26,27 @@ export default function TermsDialog() {
       data.terms.map((item: TermsDataType) => {
         return {
           version: item.termsVersion,
-          period: `${new Date(item.startDate)} ~ ${
-            item.endDate !== 0 ? new Date(item.endDate) : "현재"
+          period: `${format(new Date(item.startDate),"yyyy.MM.dd")} ~ ${
+            item.endDate !== 0 ? format(new Date(item.endDate),"yyyy.MM.dd") : "현재"
           }`,
         };
       }),
     [data]
   );
 
-  const [currentTerm, setCurrentTerm] = useState<number>(0);
+  const [currentTerm, setCurrentTerm] = useState<number>(periodList?periodList[0].version:0);
+
+  useEffect(()=>{
+    if(periodList) setCurrentTerm(periodList[0].version);
+  },[periodList])
 
   const termContents = useMemo(
     () => (
       <Fragment>
         {data ? (
           <ContentAnswer
-            key={data.terms[currentTerm].termsVersion}
-            answerHtml={data.terms[0].contents}
+            key={currentTerm}
+            answerHtml={data.terms.find((term:TermsDataType)=>term.termsVersion===currentTerm)?.contents}
           />
         ) : (
           <></>
@@ -46,6 +55,10 @@ export default function TermsDialog() {
     ),
     [currentTerm, data]
   );
+
+  const handleChange = useCallback((selected:string)=>{
+    setCurrentTerm(Number(selected));
+  },[])
 
   return (
     <Dialog>
@@ -57,16 +70,16 @@ export default function TermsDialog() {
           이용약관
         </button>
       </DialogTrigger>
-      <DialogContent>
+      <DialogContent className="max-h-[90vh] min-w-[85vw] rounded-none overflow-y-scroll">
         <DialogHeader>
-          <DialogTitle>이용약관</DialogTitle>
+          <DialogTitle className="text-start">이용약관</DialogTitle>
           {periodList ? (
-            <Select>
-              <SelectTrigger className="w-[180px]">
-                <SelectValue defaultValue={String()} />
+            <Select onValueChange={handleChange}  value={String(currentTerm)}>
+              <SelectTrigger className="w-full">
+                <SelectValue />
               </SelectTrigger>
               <SelectContent>
-                {periodList.map((item) => (
+                {periodList.map((item:PeriodListType) => (
                   <SelectItem value={String(item.version)} key={item.version}>
                     {item.period}
                   </SelectItem>

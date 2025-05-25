@@ -4,6 +4,7 @@ import "./globals.css";
 import AppHeader from "@/components/common/AppHeader";
 import AppFooter from "@/components/common/AppFooter";
 import ProviderWrapper from "@/components/common/ProviderWrapper";
+import FloatingActionButton from "@/components/common/FloatingActionButton";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -31,7 +32,7 @@ export default function RootLayout({
         <ProviderWrapper>
           <AppHeader />
           {children}
-
+          <FloatingActionButton/>
           <AppFooter />
         </ProviderWrapper>
       </body>

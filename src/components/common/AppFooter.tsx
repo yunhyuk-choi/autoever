@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { memo } from "react";
-import TermsDialog from "./TermsDialog";
+import TermsDialog from "../terms/TermsDialog";
 
 function AppFooter() {
   return (

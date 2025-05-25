@@ -1,7 +1,8 @@
 "use client";
 
-import { useState } from "react";
+import { Fragment, useState } from "react";
 import { motion } from "framer-motion";
+import MobileMenuDrawer from "./MobileMenuDrawer";
 
 export default function HamburgerToggle() {
   const [isOpen, setIsOpen] = useState(false);
@@ -9,6 +10,7 @@ export default function HamburgerToggle() {
   const toggleMenu = () => setIsOpen((prev) => !prev);
 
   return (
+    <Fragment>
     <button
       className="xl:hidden relative w-10 h-10 flex items-center justify-center group p-2 m-1 hover:cursor-pointer"
       onClick={toggleMenu}
@@ -27,6 +29,7 @@ export default function HamburgerToggle() {
       <motion.span
         animate={{
           opacity: isOpen ? 0 : 1,
+          x: isOpen ? 10:0
         }}
         className="absolute w-5 h-0.5 top-5 bg-black"
         transition={{ duration: 0.3 }}
@@ -41,5 +44,8 @@ export default function HamburgerToggle() {
         transition={{ duration: 0.3 }}
       />
     </button>
+    <MobileMenuDrawer open={isOpen} onClose={toggleMenu}/>
+    </Fragment>
+
   );
 }

@@ -1,13 +1,14 @@
 "use client";
 
 import { ChangeEvent, Fragment, KeyboardEvent, useCallback, useEffect, useState } from "react";
-import { Input } from "../ui/input";
+import { Input } from "../../ui/input";
 import { Search, X } from "lucide-react";
 import { useCategory } from "@/store/store";
 import SearchWarningDialog from "./SearchWarningDialog";
+import SearchResultBar from "./SearchResultBar";
 
 export default function SearchBar() {
-  const { tab, setQuestion } = useCategory();
+  const { tab,question, setQuestion } = useCategory();
   const [input, setInput] = useState<string>("");
   const [isOpen, setIsOpen] = useState<boolean>(false);
 
@@ -41,15 +42,19 @@ export default function SearchBar() {
     setInput("");
   }, [tab]);
 
+  useEffect(()=> {
+    if(question==="") setInput("")
+  },[question])
+
   return (
     <Fragment>
-      <div className="flex items-center gap-2 max-w-md">
+      <div className="flex items-center gap-2 w-full mt-5 mb-5 md:p-[24px] md:bg-[#f8f8f8]">
         <div className="relative flex-1">
           <Input
             value={input}
             onChange={handleChange}
             placeholder="찾으시는 내용을 입력해 주세요"
-            className="pr-10 border-s"
+            className="pr-10 border-1 border-black rounded-none h-[48px] bg-white"
             onKeyDown={handleEnter}
           />
           <div className="flex flex-row gap-3 absolute right-2 top-1/2 -translate-y-1/2">
@@ -68,6 +73,7 @@ export default function SearchBar() {
           </div>
         </div>
       </div>
+      <SearchResultBar />
       <SearchWarningDialog isOpen={isOpen} handleClose={handleClose} />
     </Fragment>
   );

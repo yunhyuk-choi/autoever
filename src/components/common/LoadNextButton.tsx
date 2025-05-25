@@ -9,8 +9,11 @@ interface LoadNextButtonProps {
 
 export default function LoadNextButton({ value, className, onClickHandler }: LoadNextButtonProps) {
   return (
-    <button className={`flex flex-row gap-2 ${className}`} value={value} onClick={onClickHandler}>
+    <div className="flex flex-row justify-center font-semibold ">
+    <button className={`flex flex-row mt-[40px] justify-center hover:cursor-pointer items-center  gap-2 ${className}`} value={value} onClick={onClickHandler}>
       <Plus /> 더보기
     </button>
+    </div>
+
   );
 }

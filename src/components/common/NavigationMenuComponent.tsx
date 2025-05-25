@@ -11,19 +11,19 @@ function NavigationMenuComponent() {
         서비스 소개
       </Link>
       <Link
-        href={"https://wiblebiz.kia.com/Guide"}
+        href={"/FAQ"}
         className="text-[18px] font-extrabold pr-1 pl-1 "
       >
         자주 묻는 질문
       </Link>
       <Link
-        href={"https://wiblebiz.kia.com/Guide"}
+        href={"https://wiblebiz.kia.com/News"}
         className="text-[18px] font-extrabold pr-1 pl-1 "
       >
         새소식
       </Link>
       <Link
-        href={"https://wiblebiz.kia.com/Guide"}
+        href={"https://wiblebiz.kia.com/Counsel"}
         className="text-[18px] font-extrabold pr-1 pl-1 "
       >
         상담문의

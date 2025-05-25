@@ -4,31 +4,15 @@ import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "..
 import { useCategory } from "@/store/store";
 import { useQuery } from "@tanstack/react-query";
 import { getFaq } from "@/service/faq";
-import { FAQDataType } from "@/type/faq";
+import { FAQDataType, FAQRequestProps, FAQResponseProps } from "@/type/faq";
 import ContentAnswer from "@/components/content/ContentAnswer";
 import LoadNextButton from "@/components/common/LoadNextButton";
 import NoContent from "../common/NoContent";
-
-interface FAQRequestProps {
-  tab: string;
-  faqCategoryID: string;
-  question: string;
-  offset: number;
-}
-
-interface FAQResponseProps {
-  pageInfo: {
-    totalRecord: number;
-    offset: number;
-    limit: number;
-    prevOffset: number;
-    nextOffset: number;
-  };
-  items: FAQDataType[];
-}
+import Image from "next/image";
+import LoadingProgress from "../common/LodingProgress";
 
 function ContentComponent() {
-  const { tab, category, question } = useCategory();
+  const { tab, category, question, setResultNum } = useCategory();
   const [nextOffset, setNextOffset] = useState<number>(0);
   const [list, setList] = useState<FAQDataType[]>([]);
 
@@ -36,7 +20,7 @@ function ContentComponent() {
     return { tab: tab, faqCategoryID: category, offset: nextOffset, question: question };
   }, [category, nextOffset, question, tab]);
 
-  const { data, refetch } = useQuery<FAQResponseProps>({
+  const { data, refetch, isPending } = useQuery<FAQResponseProps>({
     queryKey: ["faq", { req }],
     queryFn: () => getFaq(req),
     enabled: req.question === "" || req.question.length > 1,
@@ -45,12 +29,17 @@ function ContentComponent() {
   useEffect(() => {
     setNextOffset(0);
     setList([]);
-    // refetch();
+    refetch();
   }, [tab, category, question]);
 
   useEffect(() => {
     if (data) setList((prev) => [...prev, ...data.items]);
   }, [data]);
+
+  useEffect(()=>{
+    if (question!=="" && data) setResultNum(data.pageInfo.totalRecord);
+    if (question==="") setResultNum(-1);
+  },[data,question,setResultNum])
 
   const handleNext = useCallback(
     (e: MouseEvent<HTMLButtonElement>) => {
@@ -66,10 +55,17 @@ function ContentComponent() {
         {list.length ? (
           list.map((item) => (
             <AccordionItem key={item.id} value={String(item.id)}>
-              <AccordionTrigger className="font-bold">
-                <h2>{item.question}</h2>
+              <AccordionTrigger className="flex flex-wrap xl:flex-row hover:cursor-pointer data-[state=open]:bg-[#f8f8f8] text-[20px] border-b-1 p-[24px_0] border-gray-300 hover:no-underline">
+                <div className="flex flex-row gap-2 text-[16px] w-full xl:w-auto">
+                {item.categoryName!=="도입문의"?<em className="flex flex-row text-center xl:w-[8em] hover:none text-gray-500">{item.categoryName}
+                  <Image className="ml-3 xl:hidden" src={"/arrowRight.svg"} width={16} height={16} alt="arrowRight" />
+                </em>:<></>}
+                <em className="text-center xl:w-[8em] text-gray-500">{item.subCategoryName}</em>
+                </div>
+                
+                <h2 className="flex-[1_1] font-bold ">{item.question}</h2>
               </AccordionTrigger>
-              <AccordionContent>
+              <AccordionContent className="overflow-x-scroll p-[32px_40px]">
                 <ContentAnswer answerHtml={item.answer} />
               </AccordionContent>
             </AccordionItem>
@@ -78,7 +74,7 @@ function ContentComponent() {
           <NoContent />
         )}
       </Accordion>
-
+      <LoadingProgress className={isPending?"flex":"hidden"} />
       <LoadNextButton
         onClickHandler={handleNext}
         value={data ? String(data.pageInfo.nextOffset) : ""}

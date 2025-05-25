@@ -6,6 +6,7 @@ export const useCategory = create<CategoryStoreProps>()((set) => ({
   tab: CONSULT,
   category: "all",
   question: "",
+  resultNum: 0,
   setTab: (currentTab: string) => {
     set(() => ({ tab: currentTab, category: "all", question: "" }));
   },
@@ -15,4 +16,7 @@ export const useCategory = create<CategoryStoreProps>()((set) => ({
   setQuestion: (questionString: string) => {
     set(() => ({ question: questionString }));
   },
+  setResultNum: (searchResultNum:number) => {
+    set(()=>({resultNum: searchResultNum}));
+  }
 }));
