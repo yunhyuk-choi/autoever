@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { memo } from "react";
+import TermsDialog from "../terms/TermsDialog";
 
 function AppFooter() {
   return (
@@ -15,12 +16,7 @@ function AppFooter() {
                 <b className="text-[16px]">개인정보 처리방침</b>
               </button>
             </Link>
-            <button
-              type="button"
-              className="pt-4 pb-4 hover:cursor-pointer hover:underline text-white text-[16px]"
-            >
-              이용약관
-            </button>
+            <TermsDialog />
           </span>
           <address className="xl:flex justify-end">
             <span className="mr-3 ">

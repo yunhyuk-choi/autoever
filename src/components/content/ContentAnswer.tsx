@@ -12,8 +12,8 @@ function ContentAnswer({ answerHtml }: ContentAnswerProps) {
   const cleanHtml = DOMPurify.sanitize(answerHtml);
 
   return (
-    <div className="mb-6">
-      <div className="mt-2 space-y-1 leading-relaxed">{parse(cleanHtml, options)}</div>
+    <div className="mb-6 overflow-x-hidden">
+      <div className="mt-2 space-y-1 leading-relaxed ">{parse(cleanHtml, options)}</div>
     </div>
   );
 }

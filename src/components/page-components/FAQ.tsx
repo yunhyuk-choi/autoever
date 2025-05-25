@@ -1,9 +1,9 @@
 import { memo } from "react";
-import SubCategoryBar from "../common/SubCategoryBar";
+import SubCategoryBar from "../content/contents-items/SubCategoryBar";
 import ContentComponent from "../content/ContentComponent";
-import AskService from "../common/AskService";
-import InfoUsing from "../common/InfoUsing";
-import DownloadAppComponent from "../common/DownloadAppComponent";
+import AskService from "../content/contents-items/AskService";
+import InfoUsing from "../content/contents-items/InfoUsing";
+import DownloadAppComponent from "../content/contents-items/DownloadAppComponent";
 
 function FAQ() {
   return (
